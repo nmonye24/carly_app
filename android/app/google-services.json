@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "669219292315",
+    "project_id": "carly-ed1c4",
+    "storage_bucket": "carly-ed1c4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:669219292315:android:340220ce8d6cae3874f23e",
+        "android_client_info": {
+          "package_name": "com.newtonmonye.carlyapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "669219292315-j5ooohtbl5malgi3gccfov550d8f77rm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCDtQTWefjNLGbxc7Ex1H5_TAOJ4xwEr2w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "669219292315-j5ooohtbl5malgi3gccfov550d8f77rm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
