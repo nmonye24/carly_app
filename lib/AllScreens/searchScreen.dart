@@ -151,7 +151,7 @@ class _SearchScreenState extends State<SearchScreen>
                 padding: EdgeInsets.all(0.0),
                 itemBuilder: (context, index)
                 {
-                  return PredictionTile(placePredictions: placePredictionList[index], key: null,);
+                  return PredictionTile(placePredictions: placePredictionList[index],);
                 },
                 separatorBuilder: (BuildContext context, int index) => DividerWidget(),
                 itemCount: placePredictionList.length,
@@ -198,7 +198,7 @@ class PredictionTile extends StatelessWidget
 {
   final PlacePredictions placePredictions;
 
-  PredictionTile({required Key key, required this.placePredictions}) : super(key: key);
+  PredictionTile({Key? key, required this.placePredictions}) : super(key: key);
 
   @override
   Widget build(BuildContext context)
@@ -258,11 +258,11 @@ class PredictionTile extends StatelessWidget
 
     if(res["status"] == "OK")
     {
-      Address address = Address();
-      address.placeName = res["result"]["name"];
+      Address address = Address(placeFormattedAddress: '', placeName: res["result"]["name"], placeId: placeId, latitude: res["result"]["geometry"]["location"]["lat"], longitude: res["result"]["geometry"]["location"]["lng"]);
+      /*address.placeName = res["result"]["name"];
       address.placeId = placeId;
       address.latitude = res["result"]["geometry"]["location"]["lat"];
-      address.longitude = res["result"]["geometry"]["location"]["lng"];
+      address.longitude = res["result"]["geometry"]["location"]["lng"];*/
 
       Provider.of<AppData>(context, listen: false).updateDropOffLocationAddress(address);
       print("This is the Drop Off Location :: ");

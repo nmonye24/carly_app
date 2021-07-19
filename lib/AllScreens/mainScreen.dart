@@ -206,9 +206,9 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin
             Navigator.of(context).push(MaterialPageRoute(builder: (context) => RatingScreen(driverId: driverId)));
 
             rideRequestRef.onDisconnect();
-            rideRequestRef = null;
+            //rideRequestRef = null;
             rideStreamSubscription.cancel();
-            rideStreamSubscription = null;
+            //rideStreamSubscription = null;
             resetApp();
           }
         }
@@ -867,7 +867,7 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin
                             Colors.red,
                           ],
                           textAlign: TextAlign.center,
-                          alignment: AlignmentDirectional.topStart // or Alignment.topLeft
+                          //alignment: AlignmentDirectional.topStart // or Alignment.topLeft
                       ),
                     ),
 
@@ -885,7 +885,7 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(26.0),
-                          border: Border.all(width: 2.0, color: Colors.grey[300]),
+                          border: Border.all(width: 2.0, color: Colors.grey.shade300),
                         ),
                         child: Icon(Icons.close, size: 26.0,),
                       ),
@@ -964,7 +964,7 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin
                             ),
                             onPressed: () async
                             {
-                              launch(('tel://${driverphone}'));
+                              launch(('tel://$driverphone'));
                             },
                             color: Colors.black87,
                             child: Padding(
@@ -1006,13 +1006,13 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin
 
     var details = await AssistantMethods.obtainPlaceDirectionDetails(pickUpLatLng, dropOffLatLng);
     setState(() {
-      tripDirectionDetails = details;
+      tripDirectionDetails = details!;
     });
 
     Navigator.pop(context);
 
     print("This is Encoded Points ::");
-    print(details.encodedPoints);
+    print(details!.encodedPoints);
 
     PolylinePoints polylinePoints = PolylinePoints();
     List<PointLatLng> decodedPolyLinePointsResult = polylinePoints.decodePolyline(details.encodedPoints);
@@ -1110,17 +1110,17 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin
   {
     Geofire.initialize("availableDrivers");
     //comment
-    Geofire.queryAtLocation(currentPosition.latitude, currentPosition.longitude, 15).listen((map) {
+    Geofire.queryAtLocation(currentPosition.latitude, currentPosition.longitude, 15)?.listen((map) {
       print(map);
       if (map != null) {
         var callBack = map['callBack'];
 
         switch (callBack) {
           case Geofire.onKeyEntered:
-            NearbyAvailableDrivers nearbyAvailableDrivers = NearbyAvailableDrivers();
-            nearbyAvailableDrivers.key = map['key'];
+            NearbyAvailableDrivers nearbyAvailableDrivers = NearbyAvailableDrivers(key: map['key'], latitude: map['latitude'], longitude: map['longitude']);
+            /*nearbyAvailableDrivers.key = map['key'];
             nearbyAvailableDrivers.latitude = map['latitude'];
-            nearbyAvailableDrivers.longitude = map['longitude'];
+            nearbyAvailableDrivers.longitude = map['longitude'];*/
             GeoFireAssistant.nearByAvailableDriversList.add(nearbyAvailableDrivers);
             if(nearbyAvailableDriverKeysLoaded == true)
             {
@@ -1134,10 +1134,10 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin
             break;
 
           case Geofire.onKeyMoved:
-            NearbyAvailableDrivers nearbyAvailableDrivers = NearbyAvailableDrivers();
-            nearbyAvailableDrivers.key = map['key'];
+            NearbyAvailableDrivers nearbyAvailableDrivers = NearbyAvailableDrivers(key: map['key'], latitude: map['latitude'], longitude: map['longitude']);
+            /*nearbyAvailableDrivers.key = map['key'];
             nearbyAvailableDrivers.latitude = map['latitude'];
-            nearbyAvailableDrivers.longitude = map['longitude'];
+            nearbyAvailableDrivers.longitude = map['longitude'];*/
             GeoFireAssistant.updateDriverNearbyLocation(nearbyAvailableDrivers);
             updateAvailableDriversOnMap();
             break;
