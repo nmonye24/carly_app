@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:carly_app/AllScreens/mainScreen.dart';
 import 'package:carly_app/AllScreens/registrationScreen.dart';
 import 'package:carly_app/AllWidgets/progressDialog.dart';
-import 'package:carly_app/configMaps.dart';
 import 'package:carly_app/main.dart';
 
 
@@ -87,9 +86,14 @@ class _LoginScreenState extends State<LoginScreen>
                     ),
 
                     SizedBox(height: 20.0,),
-                    RaisedButton(
-                      color: Colors.yellow,
-                      textColor: Colors.white,
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.yellow,
+                        onPrimary: Colors.white,
+                        shape: new RoundedRectangleBorder(
+                          borderRadius: new BorderRadius.circular(24.0),
+                        ),
+                      ),
                       child: Container(
                         height: 50.0,
                         child: Center(
@@ -98,9 +102,6 @@ class _LoginScreenState extends State<LoginScreen>
                             style: TextStyle(fontSize: 18.0, fontFamily: "Brand Bold"),
                           ),
                         ),
-                      ),
-                      shape: new RoundedRectangleBorder(
-                        borderRadius: new BorderRadius.circular(24.0),
                       ),
                       onPressed: ()
                       {
@@ -123,7 +124,7 @@ class _LoginScreenState extends State<LoginScreen>
                 ),
               ),
 
-              FlatButton(
+              TextButton(
                 onPressed: ()
                 {
                   Navigator.pushNamedAndRemoveUntil(context, RegistrationScreen.idScreen, (route) => false);

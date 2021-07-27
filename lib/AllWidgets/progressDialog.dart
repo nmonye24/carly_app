@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class ProgressDialog extends StatelessWidget
 {
-  String message;
+  final String message;
   ProgressDialog({required this.message});
 
   @override

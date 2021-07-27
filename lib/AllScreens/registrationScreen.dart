@@ -11,10 +11,10 @@ class RegistrationScreen extends StatelessWidget
 {
   static const String idScreen = "register";
 
-  TextEditingController nameTextEditingController = TextEditingController();
-  TextEditingController emailTextEditingController = TextEditingController();
-  TextEditingController phoneTextEditingController = TextEditingController();
-  TextEditingController passwordTextEditingController = TextEditingController();
+  final TextEditingController nameTextEditingController = TextEditingController();
+  final TextEditingController emailTextEditingController = TextEditingController();
+  final TextEditingController phoneTextEditingController = TextEditingController();
+  final TextEditingController passwordTextEditingController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +44,6 @@ class RegistrationScreen extends StatelessWidget
                 padding: EdgeInsets.all(20.0),
                 child: Column(
                   children: [
-
                     SizedBox(height: 1.0,),
                     TextField(
                       controller: nameTextEditingController,
@@ -114,9 +113,14 @@ class RegistrationScreen extends StatelessWidget
                     ),
 
                     SizedBox(height: 20.0,),
-                    RaisedButton(
-                      color: Colors.yellow,
-                      textColor: Colors.white,
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.yellow,
+                        onPrimary: Colors.white,
+                        shape: new RoundedRectangleBorder(
+                          borderRadius: new BorderRadius.circular(24.0),
+                        ),
+                      ),
                       child: Container(
                         height: 50.0,
                         child: Center(
@@ -125,9 +129,6 @@ class RegistrationScreen extends StatelessWidget
                             style: TextStyle(fontSize: 18.0, fontFamily: "Brand Bold"),
                           ),
                         ),
-                      ),
-                      shape: new RoundedRectangleBorder(
-                        borderRadius: new BorderRadius.circular(24.0),
                       ),
                       onPressed: ()
                       {
@@ -158,7 +159,7 @@ class RegistrationScreen extends StatelessWidget
                 ),
               ),
 
-              FlatButton(
+              TextButton(
                 onPressed: ()
                 {
                   Navigator.pushNamedAndRemoveUntil(context, LoginScreen.idScreen, (route) => false);

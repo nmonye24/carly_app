@@ -24,7 +24,6 @@ import 'package:carly_app/Assistants/assistantMethods.dart';
 import 'package:carly_app/Assistants/geoFireAssistant.dart';
 import 'package:carly_app/DataHandler/appData.dart';
 import 'package:carly_app/Models/directDetails.dart';
-import 'package:carly_app/Models/history.dart';
 import 'package:carly_app/Models/nearbyAvailableDrivers.dart';
 import 'package:carly_app/configMaps.dart';
 import 'package:carly_app/main.dart';
@@ -82,6 +81,21 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin
   bool isRequestingPositionDetails = false;
 
   String uName="";
+
+  //Animated Text Getters
+  static const colorizeColors = [
+    Colors.green,
+    Colors.purple,
+    Colors.pink,
+    Colors.blue,
+    Colors.yellow,
+    Colors.red,
+  ];
+
+  static const colorizeTextStyle = TextStyle(
+    fontSize: 55.0,
+    fontFamily: 'Signatra',
+  );
 
 
   @override
@@ -345,7 +359,7 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin
     String address = await AssistantMethods.searchCoordinateAddress(position, context);
     print("This is your Address :: " + address);
 
-    initGeoFireListner();
+    initGeoFireListener();
 
     uName = userCurrentInfo!.name;
 
@@ -725,13 +739,13 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin
                             padding: EdgeInsets.symmetric(horizontal: 16.0),
                             child: Row(
                               children: [
-                                Image.asset("images/ubergo.png", height: 70.0, width: 80.0,),
+                                Image.asset("images/comfort.png", height: 70.0, width: 80.0,),
                                 SizedBox(width: 16.0,),
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      "Uber-Go", style: TextStyle(fontSize: 18.0, fontFamily: "Brand Bold",),
+                                      "Comfort", style: TextStyle(fontSize: 18.0, fontFamily: "Brand Bold",),
                                     ),
                                     Text(
                                       ((tripDirectionDetails != null) ? tripDirectionDetails.distanceText : '') , style: TextStyle(fontSize: 16.0, color: Colors.grey,),
@@ -752,15 +766,15 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin
                       Divider(height: 2.0, thickness: 2.0,),
                       SizedBox(height: 10.0,),
 
-                      //uber-x ride
+                      //carlyX ride
                       GestureDetector(
                         onTap: ()
                         {
-                          displayToastMessage("searching Uber-X...", context);
+                          displayToastMessage("searching Carly-X...", context);
 
                           setState(() {
                             state = "requesting";
-                            carRideType = "uber-x";
+                            carRideType = "carly-x";
                           });
                           displayRequestRideContainer();
                           availableDrivers = GeoFireAssistant.nearByAvailableDriversList;
@@ -778,7 +792,7 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      "Uber-X", style: TextStyle(fontSize: 18.0, fontFamily: "Brand Bold",),
+                                      "Carly-X", style: TextStyle(fontSize: 18.0, fontFamily: "Brand Bold",),
                                     ),
                                     Text(
                                       ((tripDirectionDetails != null) ? tripDirectionDetails.distanceText : '') , style: TextStyle(fontSize: 16.0, color: Colors.grey,),
@@ -818,7 +832,7 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin
             ),
           ),
 
-          //Cancel Ui
+          //Cancel UI
           Positioned(
             bottom: 0.0,
             left: 0.0,
@@ -845,29 +859,28 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin
 
                     SizedBox(
                       width: double.infinity,
-                      child: ColorizeAnimatedTextKit(
-                          onTap: () {
-                            print("Tap Event");
-                          },
-                          text: [
-                            "Requesting a Ride...",
-                            "Please wait...",
-                            "Finding a Driver...",
-                          ],
-                          textStyle: TextStyle(
-                              fontSize: 55.0,
-                              fontFamily: "Signatra"
+                      child: AnimatedTextKit(
+                        animatedTexts: [
+                          ColorizeAnimatedText(
+                            'Requesting a Ride...',
+                            textStyle: colorizeTextStyle,
+                            colors: colorizeColors,
                           ),
-                          colors: [
-                            Colors.green,
-                            Colors.purple,
-                            Colors.pink,
-                            Colors.blue,
-                            Colors.yellow,
-                            Colors.red,
-                          ],
-                          textAlign: TextAlign.center,
-                          //alignment: AlignmentDirectional.topStart // or Alignment.topLeft
+                          ColorizeAnimatedText(
+                            'Please wait...',
+                            textStyle: colorizeTextStyle,
+                            colors: colorizeColors,
+                          ),
+                          ColorizeAnimatedText(
+                            'Finding a Driver...',
+                            textStyle: colorizeTextStyle,
+                            colors: colorizeColors,
+                          ),
+                        ],
+                        isRepeatingAnimation: true,
+                        onTap: () {
+                          print("Tap Event");
+                        },
                       ),
                     ),
 
@@ -903,7 +916,7 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin
             ),
           ),
 
-          //Display Assisned Driver Info
+          //Display Assigned Driver Info
           Positioned(
             bottom: 0.0,
             left: 0.0,
@@ -958,15 +971,18 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin
                         //call button
                         Padding(
                           padding: EdgeInsets.symmetric(horizontal: 20.0),
-                          child: RaisedButton(
-                            shape: new RoundedRectangleBorder(
-                              borderRadius: new BorderRadius.circular(24.0),
-                            ),
+                          child:
+                           ElevatedButton(
+                             style: ElevatedButton.styleFrom(
+                               primary: Colors.black87,
+                               shape: new RoundedRectangleBorder(
+                                 borderRadius: new BorderRadius.circular(24.0),
+                               ),
+                             ),
                             onPressed: () async
                             {
                               launch(('tel://$driverphone'));
                             },
-                            color: Colors.black87,
                             child: Padding(
                               padding: EdgeInsets.all(17.0),
                               child: Row(
@@ -1106,7 +1122,7 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin
     });
   }
 
-  void initGeoFireListner()
+  void initGeoFireListener()
   {
     Geofire.initialize("availableDrivers");
     //comment
@@ -1117,10 +1133,16 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin
 
         switch (callBack) {
           case Geofire.onKeyEntered:
-            NearbyAvailableDrivers nearbyAvailableDrivers = NearbyAvailableDrivers(key: map['key'], latitude: map['latitude'], longitude: map['longitude']);
+            NearbyAvailableDrivers nearbyAvailableDrivers = NearbyAvailableDrivers(
+                key: map['key'],
+                latitude: map['latitude'],
+                longitude: map['longitude']
+            );
+
             /*nearbyAvailableDrivers.key = map['key'];
             nearbyAvailableDrivers.latitude = map['latitude'];
             nearbyAvailableDrivers.longitude = map['longitude'];*/
+
             GeoFireAssistant.nearByAvailableDriversList.add(nearbyAvailableDrivers);
             if(nearbyAvailableDriverKeysLoaded == true)
             {
@@ -1134,10 +1156,16 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin
             break;
 
           case Geofire.onKeyMoved:
-            NearbyAvailableDrivers nearbyAvailableDrivers = NearbyAvailableDrivers(key: map['key'], latitude: map['latitude'], longitude: map['longitude']);
+            NearbyAvailableDrivers nearbyAvailableDrivers = NearbyAvailableDrivers(
+                key: map['key'],
+                latitude: map['latitude'],
+                longitude: map['longitude']
+            );
+
             /*nearbyAvailableDrivers.key = map['key'];
             nearbyAvailableDrivers.latitude = map['latitude'];
             nearbyAvailableDrivers.longitude = map['longitude'];*/
+
             GeoFireAssistant.updateDriverNearbyLocation(nearbyAvailableDrivers);
             updateAvailableDriversOnMap();
             break;
@@ -1162,11 +1190,11 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin
     Set<Marker> tMakers = Set<Marker>();
     for(NearbyAvailableDrivers driver in GeoFireAssistant.nearByAvailableDriversList)
     {
-      LatLng driverAvaiablePosition = LatLng(driver.latitude, driver.longitude);
+      LatLng driverAvailablePosition = LatLng(driver.latitude, driver.longitude);
 
       Marker marker = Marker(
         markerId: MarkerId('driver${driver.key}'),
-        position: driverAvaiablePosition,
+        position: driverAvailablePosition,
         icon: nearByIcon,
         //rotation: AssistantMethods.createRandomNumber(360),
       );
@@ -1183,7 +1211,7 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin
     if(nearByIcon == null)
     {
       ImageConfiguration imageConfiguration = createLocalImageConfiguration(context, size: Size(2, 2));
-      BitmapDescriptor.fromAssetImage(imageConfiguration, "images/car_ios.png")
+      BitmapDescriptor.fromAssetImage(imageConfiguration, "images/top-comfort.png")
           .then((value)
       {
         nearByIcon = value;

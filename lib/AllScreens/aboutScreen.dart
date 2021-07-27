@@ -19,7 +19,7 @@ class _MyAboutScreenState extends State<AboutScreen> {
             Container(
               height: 220,
               child: Center(
-                child: Image.asset('images/uberx.png'),
+                child: Image.asset('images/carlyX.jpeg'),
               ),
             ),
             Padding(
@@ -36,7 +36,7 @@ class _MyAboutScreenState extends State<AboutScreen> {
                     'This app has been developed by Muhammad Ali, '
                         'Co-founder of Coding Cafe. This app offer cheap rides at cheap rates, '
                         'and that\'s why 10M+ people already use this app',
-                    style: TextStyle(fontFamily: "Brand-Bold"),
+                    style: TextStyle(fontFamily: "Brand Bold"),
                     textAlign: TextAlign.center,
                   ),
                 ],
@@ -44,18 +44,20 @@ class _MyAboutScreenState extends State<AboutScreen> {
             ),
 
             SizedBox(height: 40),
-            FlatButton(
+            TextButton(
                 onPressed: () {
                   Navigator.pushNamedAndRemoveUntil(context, MainScreen.idScreen, (route) => false);
                 },
+                style: TextButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: new BorderRadius.circular(10.0))
+                ),
                 child: const Text(
                     'Go Back',
                     style: TextStyle(
                         fontSize: 18, color: Colors.black
                     )
                 ),
-                shape: RoundedRectangleBorder(
-                    borderRadius: new BorderRadius.circular(10.0))
             ),
           ],
         ));

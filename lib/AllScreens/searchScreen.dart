@@ -22,7 +22,7 @@ class _SearchScreenState extends State<SearchScreen>
   @override
   Widget build(BuildContext context)
   {
-    String placeAddress = Provider.of<AppData>(context).pickUpLocation.placeName ?? "";
+    String placeAddress = Provider.of<AppData>(context).pickUpLocation.placeName;
     pickUpTextEditingController.text = placeAddress;
 
     return Scaffold(
@@ -203,8 +203,10 @@ class PredictionTile extends StatelessWidget
   @override
   Widget build(BuildContext context)
   {
-    return FlatButton(
-      padding: EdgeInsets.all(0.0),
+    return TextButton(
+      style: TextButton.styleFrom(
+        padding: EdgeInsets.all(0.0),
+      ),
       onPressed: ()
       {
         getPlaceAddressDetails(placePredictions.place_id, context);
@@ -222,9 +224,9 @@ class PredictionTile extends StatelessWidget
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SizedBox(height: 8.0,),
-                      Text(placePredictions.main_text ?? 'n/a', overflow: TextOverflow.ellipsis, style: TextStyle(fontSize: 16.0),),
+                      Text(placePredictions.main_text, overflow: TextOverflow.ellipsis, style: TextStyle(fontSize: 16.0),),
                       SizedBox(height: 2.0,),
-                      Text(placePredictions.secondary_text ?? 'n/a', overflow: TextOverflow.ellipsis, style: TextStyle(fontSize: 12.0, color: Colors.grey),),
+                      Text(placePredictions.secondary_text, overflow: TextOverflow.ellipsis, style: TextStyle(fontSize: 12.0, color: Colors.grey),),
                       SizedBox(height: 8.0,),
                     ],
                   ),
@@ -258,7 +260,14 @@ class PredictionTile extends StatelessWidget
 
     if(res["status"] == "OK")
     {
-      Address address = Address(placeFormattedAddress: '', placeName: res["result"]["name"], placeId: placeId, latitude: res["result"]["geometry"]["location"]["lat"], longitude: res["result"]["geometry"]["location"]["lng"]);
+      Address address = Address(
+          placeFormattedAddress: '',
+          placeName: res["result"]["name"],
+          placeId: placeId,
+          latitude: res["result"]["geometry"]["location"]["lat"],
+          longitude: res["result"]["geometry"]["location"]["lng"],
+      );
+
       /*address.placeName = res["result"]["name"];
       address.placeId = placeId;
       address.latitude = res["result"]["geometry"]["location"]["lat"];
