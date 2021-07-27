@@ -99,9 +99,12 @@ class _RatingScreenState extends State<RatingScreen> {
 
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 16.0),
-                child: RaisedButton(
-                  shape: new RoundedRectangleBorder(
-                    borderRadius: new BorderRadius.circular(24.0),
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.green,
+                    shape: new RoundedRectangleBorder(
+                      borderRadius: new BorderRadius.circular(24.0),
+                    ),
                   ),
                   onPressed: () async
                   {
@@ -126,7 +129,7 @@ class _RatingScreenState extends State<RatingScreen> {
 
                     Navigator.pop(context);
                   },
-                  color: Colors.green,
+
                   child: Padding(
                     padding: EdgeInsets.all(16.0),
                     child: Row(

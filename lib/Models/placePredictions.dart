@@ -1,9 +1,13 @@
 class PlacePredictions
 {
+  // ignore: non_constant_identifier_names
   late String secondary_text;
+  // ignore: non_constant_identifier_names
   late String main_text;
+  // ignore: non_constant_identifier_names
   late String place_id;
 
+  // ignore: non_constant_identifier_names
   PlacePredictions({required this.secondary_text, required this.main_text, required this.place_id});
 
   PlacePredictions.fromJson(Map<String, dynamic> json)
