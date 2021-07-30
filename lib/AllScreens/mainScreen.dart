@@ -374,6 +374,7 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin
   @override
   Widget build(BuildContext context) {
     createIconMarker();
+    
     return Scaffold(
       key: scaffoldKey,
       drawer: Container(
@@ -1208,15 +1209,12 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin
 
   void createIconMarker()
   {
-    if(nearByIcon == null)
-    {
       ImageConfiguration imageConfiguration = createLocalImageConfiguration(context, size: Size(2, 2));
       BitmapDescriptor.fromAssetImage(imageConfiguration, "images/top-comfort.png")
           .then((value)
       {
         nearByIcon = value;
       });
-    }
   }
 
   void noDriverFound()
