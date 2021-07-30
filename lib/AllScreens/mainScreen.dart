@@ -48,7 +48,7 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin
   late GoogleMapController newGoogleMapController;
 
   GlobalKey<ScaffoldState> scaffoldKey = new GlobalKey<ScaffoldState>();
-  late DirectionDetails tripDirectionDetails;
+  DirectionDetails? tripDirectionDetails;
 
   List<LatLng> pLineCoordinates = [];
   Set<Polyline> polylineSet = {};
@@ -702,13 +702,13 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin
                                       "Bike", style: TextStyle(fontSize: 18.0, fontFamily: "Brand Bold",),
                                     ),
                                     Text(
-                                      ((tripDirectionDetails != null) ? tripDirectionDetails.distanceText : '') , style: TextStyle(fontSize: 16.0, color: Colors.grey,),
+                                      ((tripDirectionDetails != null) ? tripDirectionDetails!.distanceText : '') , style: TextStyle(fontSize: 16.0, color: Colors.grey,),
                                     ),
                                   ],
                                 ),
                                 Expanded(child: Container()),
                                 Text(
-                                  ((tripDirectionDetails != null) ? '\$${(AssistantMethods.calculateFares(tripDirectionDetails))/2}' : ''), style: TextStyle(fontFamily: "Brand Bold",),
+                                  ((tripDirectionDetails != null) ? '\$${(AssistantMethods.calculateFares(tripDirectionDetails!))/2}' : ''), style: TextStyle(fontFamily: "Brand Bold",),
                                 ),
                               ],
                             ),
@@ -749,13 +749,13 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin
                                       "Comfort", style: TextStyle(fontSize: 18.0, fontFamily: "Brand Bold",),
                                     ),
                                     Text(
-                                      ((tripDirectionDetails != null) ? tripDirectionDetails.distanceText : '') , style: TextStyle(fontSize: 16.0, color: Colors.grey,),
+                                      ((tripDirectionDetails != null) ? tripDirectionDetails!.distanceText : '') , style: TextStyle(fontSize: 16.0, color: Colors.grey,),
                                     ),
                                   ],
                                 ),
                                 Expanded(child: Container()),
                                 Text(
-                                  ((tripDirectionDetails != null) ? '\$${AssistantMethods.calculateFares(tripDirectionDetails)}' : ''), style: TextStyle(fontFamily: "Brand Bold",),
+                                  ((tripDirectionDetails != null) ? '\$${AssistantMethods.calculateFares(tripDirectionDetails!)}' : ''), style: TextStyle(fontFamily: "Brand Bold",),
                                 ),
                               ],
                             ),
@@ -796,13 +796,13 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin
                                       "Carly-X", style: TextStyle(fontSize: 18.0, fontFamily: "Brand Bold",),
                                     ),
                                     Text(
-                                      ((tripDirectionDetails != null) ? tripDirectionDetails.distanceText : '') , style: TextStyle(fontSize: 16.0, color: Colors.grey,),
+                                      ((tripDirectionDetails != null) ? tripDirectionDetails!.distanceText : '') , style: TextStyle(fontSize: 16.0, color: Colors.grey,),
                                     ),
                                   ],
                                 ),
                                 Expanded(child: Container()),
                                 Text(
-                                  ((tripDirectionDetails != null) ? '\$${(AssistantMethods.calculateFares(tripDirectionDetails))*2}' : ''), style: TextStyle(fontFamily: "Brand Bold",),
+                                  ((tripDirectionDetails != null) ? '\$${(AssistantMethods.calculateFares(tripDirectionDetails!))*2}' : ''), style: TextStyle(fontFamily: "Brand Bold",),
                                 ),
                               ],
                             ),

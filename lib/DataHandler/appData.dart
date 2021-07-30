@@ -3,7 +3,9 @@ import 'package:carly_app/Models/address.dart';
 import 'package:carly_app/Models/history.dart';
 
 class AppData extends ChangeNotifier {
-  late Address pickUpLocation, dropOffLocation;
+
+  Address pickUpLocation = Address(placeFormattedAddress: '', placeName: '', placeId: '', latitude: 0.0, longitude: 0.0,);
+  Address dropOffLocation = Address(placeFormattedAddress: '', placeName: '', placeId: '', latitude: 0.0, longitude: 0.0,);
 
   String earnings = "0";
   int countTrips = 0;
